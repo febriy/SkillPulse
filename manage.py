@@ -2,9 +2,15 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+from decouple import config
 
 
 def main():
+    os.environ.setdefault(
+        "DJANGO_SETTINGS_MODULE",
+        "skillpulse.settings." + config("DJANGO_ENV", default="development"),
+    )
+
     """Run administrative tasks."""
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "skillpulse.settings")
     try:
